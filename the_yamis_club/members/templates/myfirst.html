@@ -9,19 +9,23 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             line-height: 1.6;
+            background-color: #f8f8f8; /* Fondo suave */
         }
         header {
             background-color: #0c4b33; /* Color verde de Django */
             color: white;
-            padding: 10px 0;
+            padding: 20px 0;
             text-align: center;
+            border-radius: 8px 8px 0 0;
         }
         nav ul {
             list-style: none;
             padding: 0;
             text-align: center;
-            background-color: #f4f4f4;
+            background-color: #e6f7ee; /* Fondo más claro para el nav */
             margin-bottom: 20px;
+            padding: 10px 0;
+            border-bottom: 2px solid #0c4b33;
         }
         nav ul li {
             display: inline;
@@ -31,19 +35,28 @@
             text-decoration: none;
             color: #0c4b33;
             font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #198754; /* Tono más claro al pasar el ratón */
         }
         section {
             padding: 20px;
-            border-bottom: 1px solid #ccc;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
         }
         h2 {
             color: #333;
             border-bottom: 2px solid #0c4b33;
             padding-bottom: 5px;
             margin-bottom: 15px;
+            font-size: 1.8em;
         }
         h3 {
             color: #0c4b33;
+            font-size: 1.3em;
         }
         .code-block {
             background-color: #eee;
@@ -52,9 +65,10 @@
             overflow-x: auto;
             font-family: 'Courier New', monospace;
             white-space: pre;
+            border: 1px solid #ccc;
         }
         .ventajas, .desventajas {
-            padding: 10px;
+            padding: 15px;
             border-radius: 5px;
             margin-bottom: 15px;
         }
@@ -66,11 +80,47 @@
             background-color: #fce6e6; 
             border-left: 5px solid #dc3545;
         }
+        /* Estilos de la sección de Empresas */
+        .contenedor-empresas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .caja-empresa {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            width: 200px; /* Ancho fijo para cada caja */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: transform 0.2s;
+        }
+        .caja-empresa:hover {
+            transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+            border-color: #0c4b33;
+        }
+        .logo-empresa {
+            display: block;
+            margin: 10px auto;
+            max-width: 100px; 
+            height: auto;
+            border: none;
+            padding: 0;
+        }
+        .nombre-empresa {
+            font-weight: bold;
+            color: #0c4b33;
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Guía Esencial de Django</h1>
+        <p>El framework web para perfeccionistas con fechas de entrega.</p>
     </header>
 
     <nav>
@@ -85,26 +135,24 @@
 
     <main>
         <section id="introduccion">
-            <h2> 1. Introducción a Django</h2>
+            <h2>1. Introducción a Django</h2>
             <p>Django es un framework de desarrollo web de alto nivel escrito en Python que promueve el desarrollo rápido y un diseño limpio y pragmático.</p>
             <p>Su principal objetivo es hacer que el desarrollo de sitios web complejos basados en bases de datos sea más fácil y rápido.</p>
-            <p>Django se centra en la reutilización de código y el principio "Don't Repeat Yourself" (DRY).</p>
+            <p>Django se centra en la **reutilización de código** y el principio **"Don't Repeat Yourself" (DRY)**.</p>
         </section>
         
         <section id="mtv">
-            <h2> 2. Patrón de Diseño: Modelo-Template-Vista (MTV)</h2>
-            <p>Django utiliza su propia variación del patrón Modelo-Vista-Controlador (MVC), al que denomina Modelo-Template-Vista (MTV). </p>
+            <h2>2. Patrón de Diseño: Modelo-Template-Vista (MTV)</h2>
+            <p>Django utiliza su propia variación del patrón Modelo-Vista-Controlador (MVC), al que denomina Modelo-Template-Vista (MTV).  </p>
             <ul>
-                <li>Modelo (Model): Define la estructura de tus datos (tablas de la base de datos) y maneja la interacción con ella mediante el ORM (Object-Relational Mapping). 
-                    Se encuentra en `models.py`.</li>
-                <li>Vista (View): Contiene la lógica de negocio que recibe una petición web, interactúa con el Modelo para obtener datos, y selecciona la Plantilla para renderizar una respuesta.
-                     Se encuentra en `views.py`.</li>
+                <li>Modelo (Model): Define la estructura de tus datos (tablas de la base de datos) y maneja la interacción con ella mediante el ORM (Object-Relational Mapping). Se encuentra en `models.py`.</li>
+                <li>Vista (View): Contiene la lógica de negocio que recibe una petición web, interactúa con el Modelo para obtener datos, y selecciona la Plantilla para renderizar una respuesta. Se encuentra en `views.py`.</li>
                 <li>Plantilla (Template): Se encarga de la presentación de los datos. Es un archivo HTML con etiquetas especiales que Django usa para insertar contenido dinámico.</li>
             </ul>
         </section>
 
         <section id="estructura">
-            <h2> 3. Estructura Básica de un Proyecto</h2>
+            <h2>3. Estructura Básica de un Proyecto</h2>
             <p>Al crear un proyecto Django (`django-admin startproject mi_proyecto`), se genera una estructura básica.</p>
             
             <div class="code-block">
@@ -122,13 +170,13 @@ mi_proyecto/
 
 
         <section id="proscons">
-            <h2> 4. Ventajas y Desventajas de Usar Django</h2>
+            <h2>4. Ventajas y Desventajas de Usar Django</h2>
 
             <div class="ventajas">
-                <h3> Ventajas</h3>
+                <h3>Ventajas</h3>
                 <ul>
                     <li>"Batteries Included": Viene con muchas características listas para usar, como el ORM, el panel de administración, la autenticación de usuarios y el enrutamiento de URLs. Esto acelera mucho el desarrollo.</li>
-                    <li>Seguridad Robusta: Ofrece protección automática contra muchas vulnerabilidades comunes de la web, como inyección SQL, Cross-Site Scripting (XSS) y Cross-Site Request Forgery (CSRF).</li>  
+                    <li>Seguridad Robusta: Ofrece protección automática contra muchas vulnerabilidades comunes de la web, como inyección SQL, Cross-Site Scripting (XSS) y Cross-Site Request Forgery (CSRF).</li>
                     <li>Comunidad Grande y Activa: Dispone de una documentación excelente y una gran cantidad de recursos, tutoriales y soporte en línea.</li>
                     <li>Escalabilidad: Está diseñado para manejar grandes volúmenes de tráfico y operaciones complejas, siendo una opción probada en sitios de alto tráfico.</li>
                     <li>Código Python: Aprovecha la simplicidad, legibilidad y el vasto ecosistema de bibliotecas de Python.</li>
@@ -136,10 +184,9 @@ mi_proyecto/
             </div>
 
             <div class="desventajas">
-                <h3> Desventajas</h3>
+                <h3>Desventajas</h3>
                 <ul>
-                    <li>Monolítico: Es un framework completo y, a veces, puede sentirse "demasiado grande" para proyectos muy pequeños o para aquellos que solo necesitan una funcionalidad API simple 
-                        (donde frameworks más ligeros como Flask podrían ser preferibles).</li>
+                    <li>Monolítico: Es un framework completo y, a veces, puede sentirse "demasiado grande" para proyectos muy pequeños o para aquellos que solo necesitan una funcionalidad API simple (donde frameworks más ligeros como Flask podrían ser preferibles).</li>
                     <li>Curva de Aprendizaje: Aunque es fácil empezar, dominar todas sus convenciones, el ORM y el sistema de plantillas puede tomar más tiempo que un micro-framework.</li>
                     <li>ORM: Si bien es una gran ventaja, puede ser un obstáculo cuando se necesita realizar consultas de base de datos muy específicas, complejas o altamente optimizadas que no se mapean fácilmente al ORM.</li>
                     <li>Convencional: Es un framework muy opinionado (con una forma establecida de hacer las cosas), lo que puede limitar la libertad si un desarrollador quiere desviarse mucho de la estructura predefinida.</li>
@@ -149,23 +196,41 @@ mi_proyecto/
         
 
         <section id="empresas">
-            <h2> 5. Empresas que Utilizan Django</h2>
+            <h2>5. Empresas que Utilizan Django</h2>
             <p>Debido a su escalabilidad y enfoque en la construcción rápida de aplicaciones complejas, Django es utilizado por muchas empresas líderes a nivel mundial:</p>
             
-            <ul>
-                <li>Instagram: Utiliza Django como la columna vertebral de su servidor web principal debido a su sencillez, velocidad y capacidad para manejar un tráfico masivo.</li>
-                <li>Spotify: Lo emplea en varias partes de su infraestructura para la gestión de datos y servicios internos.</li>
-                <li>Pinterest: Su plataforma inicial y gran parte de su backend están construidos sobre Django.</li>
-                <li>Mozilla: Utiliza Django para muchos de sus servicios y sitios, incluyendo el sitio web de complementos de Firefox.</li>
-                <li>National Geographic: Su sitio web y gestión de contenido se basa en Django.</li>
-            </ul>
+            <div class="contenedor-empresas">
+                <div class="caja-empresa">
+                    <div class="nombre-empresa">Instagram</div>
+                    <img class="logo-empresa" src="https://imgs.search.brave.com/VIuoLU8xLM-3r1H1mnyDP6mzc5DA1LNQe3ZtYev0Gf8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/ZnJlZWJpZXN1cHBs/eS5jb20vaW1hZ2Vz/L2xhcmdlLzJ4L2lu/c3RhZ3JhbS1sb2dv/LWdyYWRpZW50LXRy/YW5zcGFyZW50LnBu/Zw" alt="Logo de Instagram">
+                    <p>Utiliza Django como la columna vertebral de su servidor web principal.</p>
+                </div>
+                
+                <div class="caja-empresa">
+                    <div class="nombre-empresa">Spotify</div>
+                    <img class="logo-empresa" src="https://imgs.search.brave.com/MCOikQIgSJhoRaNRPCiGK-1-0l6Q60TgZInCv_Rv00E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4z/ZC5pY29uc2NvdXQu/Y29tLzNkL2ZyZWUv/dGh1bWIvZnJlZS1z/cG90aWZ5LTNkLWlj/b24tcG5nLWRvd25s/b2FkLTc1MTY4MjQu/cG5n" alt="Logo de Spotify">
+                    <p>Lo emplea en varias partes de su infraestructura para la gestión de datos.</p>
+                </div>
+                
+                <div class="caja-empresa">
+                    <div class="nombre-empresa">Mozilla</div>
+                    <img class="logo-empresa" src="https://imgs.search.brave.com/Uw02hZoykdWUlPc6UkcD6K9Mc3yYRdCoEhKw8jhjysY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc2Vla2xvZ28u/Y29tL2xvZ28tcG5n/LzkvMi9tb3ppbGxh/LWZpcmVmb3gtbG9n/by1wbmdfc2Vla2xv/Z28tOTUzOTAucG5n" alt="Logo de Mozilla Firefox">
+                    <p>Utiliza Django para muchos de sus servicios y sitios web.</p>
+                </div>
+                
+                <div class="caja-empresa">
+                    <div class="nombre-empresa">National Geographic</div>
+                    <img class="logo-empresa" src="https://imgs.search.brave.com/HX5RYEx3ug0V03CSe0JfbSB46AoUeG_cT_oJludc8d4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvbmF0/aW9uYWwtZ2VvZ3Jh/cGhpYy1sb2dvLXdw/YWZiYTNsYnh4cjBt/bW8tMi5wbmc" alt="Logo de National Geographic">
+                    <p>Su sitio web y gestión de contenido se basa en Django.</p>
+                </div>
+            </div>
         </section>
 
     </main>
 
     <footer>
         <p style="text-align: center; margin-top: 30px; font-size: 0.8em; color: #666;">
-            Esta documentación es un resumen básico del framework Django por Yamith Rosas.
+            Esta documentación es un resumen del framework Django por Yamith Rosas.
         </p>
     </footer>
 </body>
