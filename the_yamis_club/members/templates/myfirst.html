@@ -115,6 +115,23 @@
             margin-top: 10px;
             font-size: 1.1em;
         }
+        .video-responsive {
+            overflow: hidden;
+            padding-bottom: 20.25%;
+            position: relative;
+            height: 0;
+            max-width: auto;
+            margin: auto;
+        }
+        .video-responsive iframe {
+            left: 0%;
+            top: 85%%;
+            height: 95%;
+            width: 50%;
+            position: absolute;
+            border: 5px solid #0c4b33; 
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -126,7 +143,7 @@
     <nav>
         <ul>
             <li><a href="#introduccion">Introducción</a></li>
-            <li><a href="#mtv">Patrón MTV</a></li>
+            <li><a href="#video">Video Tutorial</a></li> <li><a href="#mtv">Patrón MTV</a></li>
             <li><a href="#estructura">Estructura</a></li>
             <li><a href="#proscons">Pros y Contras</a></li>
             <li><a href="#empresas">Empresas TOP</a></li>
@@ -141,8 +158,26 @@
             <p>Django se centra en la **reutilización de código** y el principio **"Don't Repeat Yourself" (DRY)**.</p>
         </section>
         
+        <section id="video">
+            <h2>2. Video Tutorial: Curso de Django</h2>
+            <p>A continuación, puedes ver una introducción completa al curso de Django desde cero hasta profesional. ¡Perfecto para empezar!</p>
+            
+            <div class="video-responsive">
+                <iframe 
+                    src="https://www.youtube.com/embed/3oCF3bOGf5o" 
+                    title="Curso de Django 3 en Español - Desde cero hasta profesional"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p style="text-align: center; font-size: 0.9em; color: #666;">
+                Video cortesía de: <a href="http://www.youtube.com/watch?v=3oCF3bOGf5o" target="_blank">Victor Robles WEB</a>
+            </p>
+        </section>
+        
         <section id="mtv">
-            <h2>2. Patrón de Diseño: Modelo-Template-Vista (MTV)</h2>
+            <h2>3. Patrón de Diseño: Modelo-Template-Vista (MTV)</h2>
             <p>Django utiliza su propia variación del patrón Modelo-Vista-Controlador (MVC), al que denomina Modelo-Template-Vista (MTV).  </p>
             <ul>
                 <li>Modelo (Model): Define la estructura de tus datos (tablas de la base de datos) y maneja la interacción con ella mediante el ORM (Object-Relational Mapping). Se encuentra en `models.py`.</li>
@@ -152,7 +187,7 @@
         </section>
 
         <section id="estructura">
-            <h2>3. Estructura Básica de un Proyecto</h2>
+            <h2>4. Estructura Básica de un Proyecto</h2>
             <p>Al crear un proyecto Django (`django-admin startproject mi_proyecto`), se genera una estructura básica.</p>
             
             <div class="code-block">
@@ -168,9 +203,10 @@ mi_proyecto/
             <p>Un proyecto Django se compone de múltiples Aplicaciones que son módulos independientes y reutilizables.</p>
         </section>
 
+        ---
 
         <section id="proscons">
-            <h2>4. Ventajas y Desventajas de Usar Django</h2>
+            <h2>5. Ventajas y Desventajas de Usar Django</h2>
 
             <div class="ventajas">
                 <h3>Ventajas</h3>
@@ -194,9 +230,10 @@ mi_proyecto/
             </div>
         </section>
         
+        ---
 
         <section id="empresas">
-            <h2>5. Empresas que Utilizan Django</h2>
+            <h2>6. Empresas que Utilizan Django</h2>
             <p>Debido a su escalabilidad y enfoque en la construcción rápida de aplicaciones complejas, Django es utilizado por muchas empresas líderes a nivel mundial:</p>
             
             <div class="contenedor-empresas">
