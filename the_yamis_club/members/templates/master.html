@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231e3c72" width="1200" height="600"/><circle cx="600" cy="300" r="200" fill="%232a5298" opacity="0.3"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.2s;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #ffd700;
+            color: #1e3c72;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: #ffed4e;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #ffd700;
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Courts Grid */
+        .courts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .court-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #f0f0f0;
+        }
+
+        .court-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .court-card h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .court-type {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: #e8f4f8;
+            color: #2a5298;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .available {
+            background: #4caf50;
+        }
+
+        .occupied {
+            background: #f44336;
+        }
+
+        /* Reservation Form */
+        .reservation-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1e3c72;
+            font-weight: 600;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        /* Coaches Section */
+        .coaches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .coach-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .coach-card:hover {
+            transform: scale(1.05);
+        }
+
+        .coach-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .coach-card h3 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Memberships */
+        .memberships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .membership-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .membership-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd700;
+        }
+
+        .membership-card.premium {
+            border-color: #ffd700;
+            position: relative;
+        }
+
+        .badge {
+            background: #ffd700;
+            color: #1e3c72;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            position: absolute;
+            top: -10px;
+            right: 20px;
+        }
+
+        .membership-card h3 {
+            color: #1e3c72;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            color: #2a5298;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .benefits {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .benefits li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .benefits li:before {
+            content: "✓ ";
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin: 0.5rem 0;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #1e3c72;
+                padding: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+        }
+        .logo a,
+        .logo a:visited,
+        .logo a:link {
+            color: inherit;          /* evita morado */
+            text-decoration: none;   /* elimina subrayado si no lo quieres */
+        }
+
+        .logo a {
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .logo a:focus {
+            outline: none;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo"><a href="/">🎾 Yamis Club</a></div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#canchas">Canchas</a></li>
+                <li><a href="#reservas">Reservas</a></li>
+                <li><a href="#entrenadores">Entrenadores</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Bienvenido al Club Tenis</h1>
+            <p>Donde la pasión por el tenis se convierte en excelencia</p>
+            <a href="#reservas" class="btn">Reserva tu Cancha</a>
+        </div>
+    </section>
+
+    <!-- Courts Section -->
+    <section id="canchas">
+        <h2>Nuestras Canchas</h2>
+        <div class="courts-grid">
+            <div class="court-card">
+                <h3>Cancha 1</h3>
+                <span class="court-type">Arcilla</span>
+                <p>Superficie profesional ideal para torneos y partidos competitivos.</p>
+                <div class="status">
+                    <span class="status-dot available"></span>
+                    <span>Disponible</span>
+                </div>
+            </div>
+            <div class="court-card">
+                <h3>Cancha 2</h3>
+                <span class="court-type">Dura</span>
+                <p>Perfecta para entrenamientos intensivos y juego rápido.</p>
+                <div class="status">
+                    <span class="status-dot available"></span>
+                    <span>Disponible</span>
+                </div>
+            </div>
+            <div class="court-card">
+                <h3>Cancha 3</h3>
+                <span class="court-type">Césped</span>
+                <p>Experiencia única de juego en superficie natural.</p>
+                <div class="status">
+                    <span class="status-dot occupied"></span>
+                    <span>Ocupada</span>
+                </div>
+            </div>
+            <div class="court-card">
+                <h3>Cancha 4</h3>
+                <span class="court-type">Dura Cubierta</span>
+                <p>Juega sin importar el clima en nuestra cancha techada.</p>
+                <div class="status">
+                    <span class="status-dot available"></span>
+                    <span>Disponible</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservas">
+        <h2>Reserva tu Cancha</h2>
+        <div class="reservation-form">
+            <form onsubmit="handleReservation(event)">
+                <div class="form-group">
+                    <label>Selecciona una Cancha</label>
+                    <select id="courtSelect" required>
+                        <option value="">-- Elige una cancha --</option>
+                        <option value="1">Cancha 1 - Arcilla</option>
+                        <option value="2">Cancha 2 - Dura</option>
+                        <option value="3">Cancha 3 - Césped</option>
+                        <option value="4">Cancha 4 - Dura Cubierta</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <input type="date" id="dateInput" required>
+                </div>
+                <div class="form-group">
+                    <label>Hora</label>
+                    <select id="timeSelect" required>
+                        <option value="">-- Selecciona horario --</option>
+                        <option value="08:00">08:00 - 09:00</option>
+                        <option value="09:00">09:00 - 10:00</option>
+                        <option value="10:00">10:00 - 11:00</option>
+                        <option value="11:00">11:00 - 12:00</option>
+                        <option value="12:00">12:00 - 13:00</option>
+                        <option value="14:00">14:00 - 15:00</option>
+                        <option value="15:00">15:00 - 16:00</option>
+                        <option value="16:00">16:00 - 17:00</option>
+                        <option value="17:00">17:00 - 18:00</option>
+                        <option value="18:00">18:00 - 19:00</option>
+                        <option value="19:00">19:00 - 20:00</option>
+                        <option value="20:00">20:00 - 21:00</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="nameInput" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Confirmar Reserva</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Members Section -->
+    <section id="miembros">
+        <h2>Miembros</h2>
+        <div class="members-grid">
+            <div class="member-card">
+                <div class="member-avatar">
+                    {% block content %} 
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </section>  
+            
+    <section id="entrenadores">
+        <h2>Nuestros Entrenadores</h2>
+        <div class="coaches-grid">
+            <div class="coach-card">
+                <div class="coach-avatar">CM</div>
+                <h3>Carlos Mendoza</h3>
+                <p><strong>Especialidad:</strong> Tenis Profesional</p>
+                <p><strong>Experiencia:</strong> 15 años</p>
+                <p>Ex jugador ATP, especialista en técnica avanzada y estrategia de juego.</p>
+            </div>
+            <div class="coach-card">
+                <div class="coach-avatar">AL</div>
+                <h3>Ana López</h3>
+                <p><strong>Especialidad:</strong> Iniciación Juvenil</p>
+                <p><strong>Experiencia:</strong> 10 años</p>
+                <p>Certificada en pedagogía deportiva, enfocada en desarrollo infantil.</p>
+            </div>
+            <div class="coach-card">
+                <div class="coach-avatar">RS</div>
+                <h3>Roberto Silva</h3>
+                <p><strong>Especialidad:</strong> Alto Rendimiento</p>
+                <p><strong>Experiencia:</strong> 12 años</p>
+                <p>Preparador físico y táctico de jugadores competitivos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Club Tenis Yamis</h4>
+                <p>El mejor lugar para practicar y disfrutar del tenis en un ambiente profesional.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p>📍 Av. Principal 123, Ciudad</p>
+                <p>📞 +1 (555) 123-4567</p>
+                <p>✉️ info@clubteniselite.com</p>
+            </div>
+            <div class="footer-section">
+                <h4>Horarios</h4>
+                <p>Lunes a Viernes: 6:00 - 22:00</p>
+                <p>Sábados: 7:00 - 21:00</p>
+                <p>Domingos: 8:00 - 20:00</p>
+            </div>
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Club Tenis de Yamis. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Handle reservation form
+        function handleReservation(event) {
+            event.preventDefault();
+            
+            const court = document.getElementById('courtSelect').value;
+            const date = document.getElementById('dateInput').value;
+            const time = document.getElementById('timeSelect').value;
+            const name = document.getElementById('nameInput').value;
+            
+            if (court && date && time && name) {
+                const courtName = document.getElementById('courtSelect').options[court].text;
+                alert('¡Reserva Confirmada!\n\nNombre: ' + name + '\nCancha: ' + courtName + '\nFecha: ' + date + '\nHora: ' + time + '\n\nTe hemos enviado un correo de confirmación.');
+                
+                // Reset form
+                event.target.reset();
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Set minimum date to today for reservation
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('dateInput').setAttribute('min', today);
+    </script>
+</body>
+</html>

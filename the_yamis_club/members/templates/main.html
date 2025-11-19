@@ -1,0 +1,29 @@
+{% extends "master.html" %}
+
+{% block content %}
+    <style>
+        .tilin {
+        list-style: none;
+        padding: 0;
+        text-align: center;  
+        margin: 5px 0;
+        }
+
+        .tilin a,
+        .tilin a:visited,
+        .tilin a:link {
+            color: inherit;          /* evita morado */
+        }
+
+        .tilin a {
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .tilin a:focus {
+            outline: none;
+        }
+    </style>
+  <p class="tilin">Check out all our <a href="members/">members</a></p>
+  
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "master.html" %} 
+
+{% block title %}
+    My Tennis Club - List of All Members
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+    /* Contenedor de la lista */
+    .member-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 900px;
+    }
+
+    /* Cada tarjeta */
+    .member-item {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: transform 0.3s;
+    }
+
+    /* Efecto hover */
+    .member-item:hover {
+        transform: scale(1.05);
+    }
+
+    /* Círculo (iniciales del nombre o icono) */
+    .member-icon {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+        font-weight: bold;
+    }
+
+    /* Enlace */
+    .member-link {
+        text-decoration: none;
+        color: #1e3c72;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+</style>
+
+<ul class="member-list">
+    {% for x in mymembers %}
+        <li class="member-item">
+            
+            <div class="member-icon">
+                {{ x.firstname|first|upper }}{{ x.lastname|first|upper }}
+            </div>
+
+            <a class="member-link" href="details/{{ x.id }}">
+                {{ x.firstname }} {{ x.lastname }}
+            </a>
+
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
