@@ -1,11 +1,54 @@
 <!DOCTYPE html>
-<html>
-<title>Wrong address</title>
-<body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Página No Encontrada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc; /* Gris muy claro */
+        }
+    </style>
+</head>
+<body class="antialiased h-screen flex items-center justify-center p-4">
 
-<h1>Ooops!</h1>
+    <div class="max-w-xl w-full bg-white shadow-xl rounded-2xl p-8 md:p-12 text-center border-t-4 border-indigo-600">
 
-<h2>I cannot find the file you requested!</h2>
+        <div class="mb-8 flex justify-center">
+            <svg class="w-16 h-16 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.354 18c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+        </div>
+
+        <h1 class="text-7xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            404
+        </h1>
+        <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+            ¡Página No Encontrada!
+        </h2>
+        
+        <p class="text-gray-500 mb-8 text-lg leading-relaxed">
+            Parece que te has perdido. La página que buscas no existe o ha sido movida. No te preocupes, le pasa hasta al mejor desarrollador.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            
+            <a href="/" class="px-6 py-3 bg-indigo-600 text-white font-bold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 transform hover:scale-105">
+                Volver a la Página Principal
+            </a>
+
+            <a href="/Contact" class="px-6 py-3 border border-gray-300 text-gray-700 font-bold rounded-lg shadow-sm hover:bg-gray-50 transition duration-300 transform hover:scale-105">
+                Contactar a Soporte
+            </a>
+        </div>
+        
+        <p class="mt-8 text-sm text-gray-400">
+            Revisa la URL e inténtalo de nuevo.
+        </p>
+    </div>
 
 </body>
 </html>

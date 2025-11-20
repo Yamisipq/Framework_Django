@@ -7,4 +7,6 @@ class Member(models.Model):
   joined_date = models.DateField(null = True)
   pokemon_fav = models.CharField(max_length=25, null = True)
   gender = models.CharField(max_length=10, null = True)
-  doc = models.CharField(max_length=15, null = True)
+  doc = models.CharField(max_length=15, null = True)  
+  def __str__(self):
+    return f"{self.firstname} {self.lastname}"
