@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'templateImg/template.css' %}">
+    <title>Miembros - Gestión</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>Img</h1>
+    <img src="{% static 'memberimg/descarga (2).jpg' %}" alt="nose xicos">
+
+    <h1>Frutaas</h1>
+    {% spaceless %}
+    <ul class="simple-list">
+        {% for x in fruits %}
+        <li>{{ x }}</li>
+        {% endfor %}
+    </ul>
+    {% endspaceless %}
+
+    {% with new_fruit="Orange" %}
+    <h3>The new fruit {{new_fruit}}</h3>
+    <h1>End of fruits</h1>
+    {% endwith %}
+
+    <h1 style="color: green;">Todos los Miembros</h1>
+    <div class="cards-grid">
+        {% for miembro in miembros %}
+        <div class="member-card">
+            <div class="card-header">
+                <h3>{{ miembro.firstname }} {{ miembro.lastname }}</h3>
+                <span class="badge {% if miembro.gender == 'Masculino' %}badge-male{% else %}badge-female{% endif %}">
+                    {{ miembro.gender }}
+                </span>
+            </div>
+            <div class="card-body">
+                <p><strong> Teléfono:</strong> {{ miembro.phone }}</p>
+                <p><strong> Documento:</strong> {{ miembro.doc }}</p>
+                <p><strong> Fecha ingreso:</strong> {{ miembro.joined_date|date:"d/m/Y" }}</p>
+                <p><strong> Pokémon favorito:</strong> {{ miembro.pokemon_fav }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h1>Columna firstname</h1>
+    <ul class="simple-list">
+        {% for x in columna_firstname %}
+        <li>{{ x }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Nombre específico</h1>
+    <div class="cards-grid">
+        {% for x in espe %}
+        <div class="member-card">
+            <div class="card-header">
+                <h3>{{ x.firstname }} {{ x.lastname }}</h3>
+            </div>
+            <div class="card-body">
+                <p><strong> Teléfono:</strong> {{ x.phone }}</p>
+                <p><strong> Pokémon:</strong> {{ x.pokemon_fav }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h1>Miembros que empiezan por L</h1>
+    <div class="cards-grid">
+        {% for x in ski %}
+        <div class="member-card">
+            <div class="card-header">
+                <h3>{{ x.firstname }} {{ x.lastname }}</h3>
+            </div>
+            <div class="card-body">
+                <p><strong> Pokémon:</strong> {{ x.pokemon_fav }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h1>Miembros que terminan en ez</h1>
+    <div class="cards-grid">
+        {% for x in tilin %}
+        <div class="member-card">
+            <div class="card-header">
+                <h3>{{ x.firstname }} {{ x.lastname }}</h3>
+            </div>
+            <div class="card-body">
+                <p><strong> Teléfono:</strong> {{ x.phone }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h1>Miembros que terminan en s</h1>
+    <div class="cards-grid">
+        {% for x in xd %}
+        <div class="member-card">
+            <div class="card-header">
+                <h3>{{ x.firstname }} {{ x.lastname }}</h3>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h1>Miembros que tienen id entre 2 y 4</h1>
+    <div class="cards-grid">
+        {% for x in nose %}
+        <div class="member-card">
+            <div class="card-header">
+                <h3>ID: {{ x.id }} - {{ x.firstname }} {{ x.lastname }}</h3>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h1>Miembros que tienen id menor o igual a 3</h1>
+    <div class="cards-grid">
+        {% for x in alo %}
+        <div class="member-card">
+            <div class="card-header">
+                <h3>ID: {{ x.id }} - {{ x.firstname }} {{ x.lastname }}</h3>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h1>Miembros ordenados por nombre</h1>
+    <div class="compact-list">
+        {% for x in order_by %}
+        <div class="compact-item">{{ x.firstname }} {{ x.lastname }}</div>
+        {% endfor %}
+    </div>
+
+    <h1>Miembros ordenados por nombre descendente</h1>
+    <div class="compact-list">
+        {% for x in order_by_desc %}
+        <div class="compact-item">{{ x.firstname }} {{ x.lastname }}</div>
+        {% endfor %}
+    </div>
+
+    <h1>{% now "Y-m-d" %}</h1>
+    {% csrf_token %}
+
+    {% include "black_friday.html" %}
+</div>
+
+</body>
+</html>
